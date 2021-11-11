@@ -11,8 +11,8 @@
       @click:append="addTask"
       @keyup.enter="addTask"
     ></v-text-field>
-    <v-list v-if="tasks.length" class="pa-0" flat>
-      <div v-for="task in tasks" :key="task.id">
+    <v-list v-if="$store.state.tasks.length" class="pa-0" flat>
+      <div v-for="task in $store.state.tasks" :key="task.id">
         <v-list-item
           @click="doneTask(task.id)"
           :class="{ 'blue lighten-5': task.done }"
@@ -51,35 +51,29 @@ export default {
   data() {
     return {
       newTaskTitle: "",
-      tasks: [],
     };
   },
   methods: {
     addTask() {
-      let task = {
-        id: Date.now(),
-        title: this.newTaskTitle,
-        done: false,
-      };
-      this.tasks.push(task);
+      this.$store.commit("addTask", this.newTaskTitle);
       this.newTaskTitle = "";
     },
+
     doneTask(id) {
-      let task = this.tasks.filter((task) => task.id === id)[0];
-      task.done = !task.done;
+      this.$store.commit("doneTask", id);
     },
     deleteTask(id) {
-      this.tasks = this.tasks.filter((task) => task.id !== id);
+      this.$store.commit("deleteTask", id);
     },
   },
 };
 </script>
 
 <style lang="sass">
-  .no-tasks
-    position: absolute
-    left: 50%
-    top: 50%
-    transform: translate(-50%,-50%)
-    opacity: transparent
+.no-tasks
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%,-50%)
+  opacity: transparent
 </style>
