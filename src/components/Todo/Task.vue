@@ -34,7 +34,7 @@ export default {
       this.$store.commit("doneTask", id);
     },
     deleteTask(id) {
-      this.$store.commit("deleteTask", id);
+      this.$store.dispatch("deleteTask", id);
     },
   },
 };
