@@ -15,6 +15,12 @@
             >{{ task.title }}</v-list-item-title
           >
         </v-list-item-content>
+        <v-list-item-action v-if="task.dueDate">
+          <v-list-item-action-text>
+            <v-icon small>mdi-calendar</v-icon>
+            {{ task.dueDate | formatDueDate}}</v-list-item-action-text
+          >
+        </v-list-item-action>
         <task-menu :task="task"></task-menu>
       </template>
     </v-list-item>
@@ -24,6 +30,7 @@
 </template>
 
 <script>
+import { format } from 'date-fns'
 export default {
   props: ["task"],
   data() {
@@ -33,6 +40,11 @@ export default {
     doneTask(id) {
       this.$store.commit("doneTask", id);
     },
+  },
+  filters: {
+    formatDueDate(value) {
+      return format(new Date(value),'MMM d')
+    }
   },
   components: {
     "task-menu": require("@/components/Todo/TaskMenu.vue").default,

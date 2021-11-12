@@ -17,6 +17,7 @@ export default new Vuex.Store({
         id: Date.now(),
         title: newTaskTitle,
         done: false,
+        dueDate: null,
       };
       state.tasks.push(task);
     },
@@ -27,9 +28,13 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
     },
-    updateTask(state, payload) {
+    updateTaskTitle(state, payload) {      
       let task = state.tasks.filter((task) => task.id === payload.id)[0];
       task.title = payload.title
+    },
+    updateDueDate(state, payload) {
+      let task = state.tasks.filter((task) => task.id === payload.id)[0];
+      task.dueDate = payload.dueDate
     },
     showSnackbar(state, text) {
       let timeout = 0
@@ -55,9 +60,13 @@ export default new Vuex.Store({
       commit('deleteTask', id)
       commit('showSnackbar', 'Task Deleted!')
     },
-    updateTask({ commit }, payload) {
-      commit('updateTask', payload)
+    updateTaskTitle({ commit }, payload) {
+      commit('updateTaskTitle', payload) 
       commit('showSnackbar', 'Task Updated!')
+    },
+    updateDueDate({ commit }, payload) {
+      commit('updateDueDate', payload)
+      commit('showSnackbar', 'Due Date Updated!')
     }
 
 
