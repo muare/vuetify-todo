@@ -11,7 +11,8 @@ export default new Vuex.Store({
     snackbar: {
       show: false,
       text: ""
-    }
+    },
+    sorting: false
   },
   mutations: {
     setSearch(state, event) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
+    },
+    setTasks(state, tasks) {
+      state.tasks = tasks
     },
     updateTaskTitle(state, payload) {
       let task = state.tasks.filter((task) => task.id === payload.id)[0];
@@ -54,6 +58,9 @@ export default new Vuex.Store({
     },
     hideSnackbar(state) {
       state.snackbar.show = false
+    },
+    toggleSorting(state) {
+      state.sorting = !state.sorting
     }
   },
   actions: {
