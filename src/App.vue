@@ -1,14 +1,20 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6"> Vuetify Todo </v-list-item-title>
-          <v-list-item-subtitle> Best Todo Ever </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
+    <v-navigation-drawer v-model="drawer" app :mobile-breakpoint="768">
+      <v-img
+        class="pa-4 pt-7"
+        src="mountains.jpg"
+        height="170"
+        gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+      >
+        <v-avatar size="70" class="mb-2">
+          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+        </v-avatar>
+        <div class="white--text text-subtitle-1 font-weight-bold">
+          John Connel
+        </div>
+        <div class="white--text text-subtitle-2">John__Connel</div>
+      </v-img>
 
       <v-list dense nav>
         <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
@@ -23,7 +29,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary" dark src="mountains.jpg" height="170px">
+    <v-app-bar app color="primary" dark src="mountains.jpg" height="170">
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
@@ -31,7 +37,7 @@
         ></v-img>
       </template>
 
-      <v-container class="pa-0">
+      <v-container class="header-container pa-0">
         <v-row>
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-spacer></v-spacer>
@@ -40,7 +46,7 @@
         <v-row>
           <v-app-bar-title class="ml-4">Vuetify Todo</v-app-bar-title>
         </v-row>
-        <v-row >
+        <v-row>
           <live-date-time></live-date-time>
         </v-row>
       </v-container>
@@ -56,9 +62,10 @@
 <script>
 export default {
   components: {
-    'search': require("@/components/Todo/Tools/Search.vue").default,
-    'live-date-time': require("@/components/Todo/Tools/LiveDateTime.vue").default,
-    'snackbar': require("@/components/common/Snackbar.vue").default,
+    search: require("@/components/Todo/Tools/Search.vue").default,
+    "live-date-time": require("@/components/Todo/Tools/LiveDateTime.vue")
+      .default,
+    snackbar: require("@/components/common/Snackbar.vue").default,
   },
   data: () => ({
     drawer: null,
@@ -69,3 +76,8 @@ export default {
   }),
 };
 </script>
+
+<style lang="sass">
+.header-container
+  max-width: none !important
+</style>
