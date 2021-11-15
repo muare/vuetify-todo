@@ -9,7 +9,7 @@
     @keyup.enter="addTask"
   >
     <template v-slot:append>
-      <v-icon :disabled="newTaskTitleInvalid">
+      <v-icon :disabled="newTaskTitleInvalid" @click="addTask">
         mdi-plus
       </v-icon>
     </template>
