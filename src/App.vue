@@ -29,11 +29,17 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary" dark src="mountains.jpg" height="170">
+    <v-app-bar
+      app
+      color="primary"
+      dark
+      src="mountains.jpg"
+      :height="$route.path === '/' ? 230 : 170"
+    >
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+          gradient="to top right, rgba(19,84,122,.9), rgba(128,208,199,.9)"
         ></v-img>
       </template>
 
@@ -44,10 +50,15 @@
           <search></search>
         </v-row>
         <v-row>
-          <v-app-bar-title class="ml-4">{{$store.state.appTitle}}</v-app-bar-title>
+          <v-app-bar-title class="ml-4">{{
+            $store.state.appTitle
+          }}</v-app-bar-title>
         </v-row>
         <v-row>
           <live-date-time></live-date-time>
+        </v-row>
+        <v-row>
+          <field-add-task v-if="$route.path === '/'"></field-add-task>
         </v-row>
       </v-container>
     </v-app-bar>
@@ -62,6 +73,7 @@
 <script>
 export default {
   components: {
+    "field-add-task": require("@/components/Todo/FieldAddTask.vue").default,
     search: require("@/components/Todo/Tools/Search.vue").default,
     "live-date-time": require("@/components/Todo/Tools/LiveDateTime.vue")
       .default,
@@ -74,9 +86,9 @@ export default {
       { title: "About", icon: "mdi-help-box", to: "/about" },
     ],
   }),
-  mounted(){
-    this.$store.dispatch('loadTasks')
-  }
+  mounted() {
+    this.$store.dispatch("loadTasks");
+  },
 };
 </script>
 

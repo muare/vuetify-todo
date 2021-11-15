@@ -11,6 +11,7 @@
     dense
     clearable
     :value="$store.state.search"
+    :disabled="$store.state.sorting"
   ></v-text-field>
 </template>
 

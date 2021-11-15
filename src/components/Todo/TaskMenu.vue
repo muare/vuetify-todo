@@ -68,7 +68,11 @@ export default {
         title: "Sort",
         icon: "mdi-drag-horizontal-variant",
         click() {
-          this.$store.commit('toggleSorting')
+          if (!this.$store.state.search) {
+            this.$store.commit("toggleSorting");
+          } else {
+            this.$store.commit("showSnackbar","Sorting not feasible when searching.")
+          }
         },
       },
     ],
@@ -84,8 +88,7 @@ export default {
     },
   },
   components: {
-    "edit-dialog": require("@/components/Todo/Dialogs/EditDialog.vue")
-      .default,
+    "edit-dialog": require("@/components/Todo/Dialogs/EditDialog.vue").default,
     "duedate-dialog": require("@/components/Todo/Dialogs/DueDateDialog.vue")
       .default,
     "delete-dialog": require("@/components/Todo/Dialogs/DeleteDialog.vue")
