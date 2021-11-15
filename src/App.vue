@@ -11,9 +11,9 @@
           <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
         </v-avatar>
         <div class="white--text text-subtitle-1 font-weight-bold">
-          John Connel
+          Grisson Xie
         </div>
-        <div class="white--text text-subtitle-2">John__Connel</div>
+        <div class="white--text text-subtitle-2">engineer</div>
       </v-img>
 
       <v-list dense nav>
